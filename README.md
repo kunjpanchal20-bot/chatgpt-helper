@@ -1,19 +1,13 @@
-# ChatGPT Helper 🤖
+# ChatGPT Helper
 
-A collection of prompts, code snippets, and projects created with ChatGPT (powered by GPT-5).  
-This repo serves as an organized space to store experiments, drafts, and reusable ideas.
+This repository is my personal workspace for testing what I can do with GitHub and ChatGPT.  
+It includes prompts, code snippets, drafts, and small projects I create while experimenting.
 
-## 📂 What’s Inside
-- Prompts for marketing, coding, and brainstorming
-- Reusable code snippets (HTML, Python, etc.)
-- AI-assisted project drafts
-- Notes & experiments
+## Services
+- Store and organize prompts  
+- Save reusable code snippets  
+- Draft website or project prototypes  
+- Document learnings and experiments
 
-## 🚀 Purpose
-To document and showcase my journey learning, building, and creating with the help of AI.  
-Feel free to fork, star ⭐, or contribute ideas.
-
-## 📫 Connect
-- Email: kunjpanchal20@gmail.com  
-- Instagram: [@kunjpanchal0](https://instagram.com/kunjpanchal0)  
-- LinkedIn: [Kunj Panchal](https://linkedin.com/in/kunjpanchal)
+## Purpose
+This repo is mainly for me to explore how GitHub works and how I can use it to keep track of my work with ChatGPT.
