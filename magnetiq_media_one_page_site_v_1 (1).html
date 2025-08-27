@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Magnetiq Media — Attract. Convert. Grow.</title>
+  <meta name="description" content="Magnetiq Media is an AI-powered marketing studio that helps brands attract, convert, and grow using data, content, and automation." />
+  <meta name="theme-color" content="#0b0b0f" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0f; /* near-black page background */
+      --card:#12121a;
+      --muted:#a9b0c3;
+      --text:#eef2ff;
+      --gold:#e6b800; /* brand gold */
+      --red:#ef233c;  /* magnet red */
+      --blue:#3b82f6; /* magnet blue */
+      --ring: 0 0 0 2px rgba(230,184,0,.25), 0 0 0 8px rgba(239,35,60,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    /* --- Nav --- */
+    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(11,11,15,.85), rgba(11,11,15,.6) 40%, rgba(11,11,15,0));backdrop-filter:saturate(180%) blur(10px)}
+    .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo svg{display:block}
+    .brand{font-weight:900;letter-spacing:.5px;font-size:1.2rem;color:var(--gold)} /* gold letters */
+    .nav-links{display:flex;gap:20px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-weight:600;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));box-shadow:0 12px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04)}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(0,0,0,.4)}
+    .btn.gold{border-color:rgba(230,184,0,.55);background:linear-gradient(180deg, rgba(230,184,0,.22), rgba(230,184,0,.12));color:#0b0b0f}
+    .btn.gold span{color:#0b0b0f}
+    .btn-outline{border-color:rgba(255,255,255,.14)}
+    /* --- Hero --- */
+    .hero{position:relative;padding:96px 0 64px;overflow:hidden}
+    .glow{position:absolute;inset:-20% -10% auto;height:560px;background:radial-gradient(60% 60% at 60% 40%, rgba(230,184,0,.28), transparent 60%), radial-gradient(60% 60% at 40% 60%, rgba(239,35,60,.22), transparent 60%)}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-weight:600;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.02)}
+    h1{font-size:clamp(2rem, 4.6vw, 4rem);line-height:1.05;margin:14px 0}
+    h1 strong{color:var(--gold);text-shadow:0 0 24px rgba(230,184,0,.22)}
+    .lead{color:#c6c9d6;font-size:1.1rem;max-width:48ch}
+    .hero-cta{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);padding:22px;border-radius:18px;box-shadow:var(--ring)}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .kpi .item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:16px;border-radius:14px;text-align:center}
+    .kpi .item h3{margin:0;font-size:1.6rem}
+    .kpi .item p{margin:6px 0 0;color:var(--muted);font-size:.9rem}
+    .device{position:relative;border-radius:22px;background:linear-gradient(180deg, #0f0f17, #0b0b0f);border:1px solid rgba(255,255,255,.08);box-shadow:0 25px 60px rgba(0,0,0,.55);padding:24px}
+    .screen{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+    .screen img{display:block;width:100%;height:auto}
+    /* --- Sections --- */
+    section{padding:84px 0;border-top:1px solid rgba(255,255,255,.06)}
+    .section-title{font-size:2rem;margin:0 0 8px}
+    .muted{color:var(--muted)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px}
+    .card h3{margin:0 0 8px}
+    .check{color:var(--gold);margin-right:8px}
+    /* --- Pricing --- */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .plan{position:relative}
+    .plan .badge{position:absolute;top:-14px;right:16px;background:var(--red);color:#fff;padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.3px}
+    .price{font-size:2.2rem;margin:10px 0}
+    /* --- CTA --- */
+    .cta{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    form{display:grid;gap:12px}
+    input, textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.02);color:var(--text);outline:none}
+    input:focus, textarea:focus{box-shadow:var(--ring);border-color:rgba(230,184,0,.4)}
+    textarea{min-height:120px;resize:vertical}
+    .tiny{font-size:.85rem;color:var(--muted)}
+    /* --- Footer --- */
+    footer{padding:24px 0 40px;border-top:1px solid rgba(255,255,255,.06);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero-grid, .cta{grid-template-columns:1fr}
+    }
+    @media (max-width: 840px){
+      .grid-3, .pricing{grid-template-columns:1fr;gap:16px}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-wrap">
+      <a href="#top" class="logo" aria-label="Magnetiq Media home">
+        <!-- Black background, gold border, red & blue U-magnet icon -->
+        <svg width="40" height="40" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+          <title>Magnetiq Media logo</title>
+          <!-- black tile with gold stroke -->
+          <rect x="3" y="3" width="58" height="58" rx="14" fill="#000" stroke="var(--gold)" stroke-width="2"/>
+          <!-- U-magnet split into red (left) and blue (right) -->
+          <path d="M32 18 A14 14 0 0 0 18 32 V46" fill="none" stroke="var(--red)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M32 18 A14 14 0 0 1 46 32 V46" fill="none" stroke="var(--blue)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- end caps -->
+          <line x1="18" y1="46" x2="24" y2="46" stroke="var(--red)" stroke-width="5" stroke-linecap="round"/>
+          <line x1="40" y1="46" x2="46" y2="46" stroke="var(--blue)" stroke-width="5" stroke-linecap="round"/>
+          <!-- subtle gold spark at the top -->
+          <circle cx="32" cy="18" r="1.6" fill="var(--gold)"/>
+        </svg>
+        <div class="brand">Magnetiq Media</div>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-outline" href="#contact">Free Audit</a>
+        <a class="btn gold" href="#contact"><span>Book a Call</span> ➜</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">AI-Powered Marketing Studio</div>
+        <h1>Attract. <strong>Convert.</strong> Grow.<br/>Marketing built for the <strong>next era</strong>.</h1>
+        <p class="lead">We combine data, creative, and automation to bring customers to you—like a magnet. Get a fast audit, a clean plan, and compounding results in 90 days.</p>
+        <div class="hero-cta">
+          <a class="btn gold" href="#contact">Start with a Free Audit</a>
+          <a class="btn" href="#work">See Results ↓</a>
+        </div>
+        <div class="kpi">
+          <div class="item"><h3>3–5x</h3><p>ROAS target</p></div>
+          <div class="item"><h3>30 days</h3><p>to first wins</p></div>
+          <div class="item"><h3>24/7</h3><p>AI optimization</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="device">
+          <div class="screen">
+            <img alt="Dashboard preview: ad performance and growth curves" src="https://images.unsplash.com/photo-1551281044-8b39e76b3bd3?q=80&w=1600&auto=format&fit=crop"/>
+          </div>
+          <div class="hero-card" style="margin-top:14px">
+            <strong style="color:var(--gold)">Magnetiq Method</strong>
+            <p class="muted" style="margin:.4rem 0 0">Audience → Offer → Creative → Channels → Automations → Iterate. No fluff, just measurable lift.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">What we do</h2>
+      <p class="muted">Full-stack growth with AI copilots and human strategy.</p>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="card">
+          <h3>AI Paid Media</h3>
+          <p class="muted">Meta, TikTok, Google. Creative testing at scale, high-intent audiences, and bid automation tuned for profitable CAC.</p>
+          <ul>
+            <li><span class="check">✓</span>Creative + UGC iteration</li>
+            <li><span class="check">✓</span>Server-side tracking</li>
+            <li><span class="check">✓</span>Daily pacing & ROAS guardrails</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Content that Converts</h3>
+          <p class="muted">Short-form video, carousels, and landing pages engineered for clarity, trust, and action.</p>
+          <ul>
+            <li><span class="check">✓</span>Script & storyboard system</li>
+            <li><span class="check">✓</span>Landing page CRO sprints</li>
+            <li><span class="check">✓</span>SEO quick wins</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Lifecycle & Automations</h3>
+          <p class="muted">Email/SMS flows, lead magnets, and CRM hygiene so every click is nurtured to revenue.</p>
+          <ul>
+            <li><span class="check">✓</span>Welcome & win-back flows</li>
+            <li><span class="check">✓</span>Lead scoring & alerts</li>
+            <li><span class="check">✓</span>Dashboards & weekly reports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK / SOCIAL PROOF -->
+  <section id="work">
+    <div class="container">
+      <h2 class="section-title">Signals & results</h2>
+      <p class="muted">Quick snapshots from recent client wins and experiments.</p>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="card">
+          <h3>Local Law Firm</h3>
+          <p class="muted">+8–10 new client inquiries/mo in 60 days using intake funnel + local SEO + Meta lead ads.</p>
+        </div>
+        <div class="card">
+          <h3>E-Com Accessories</h3>
+          <p class="muted">3.4x blended ROAS after creative sprint and TikTok Spark Ads + UGC.</p>
+        </div>
+        <div class="card">
+          <h3>Service Business</h3>
+          <p class="muted">Booked-out calendar for 6 weeks; automated follow-ups cut no-show rate by 42%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <h2 class="section-title">Our 3-week ramp</h2>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="card">
+          <h3>Week 1 — Audit</h3>
+          <p class="muted">Data plumbing, offer clarity, analytics check, and quick-win backlog.</p>
+        </div>
+        <div class="card">
+          <h3>Week 2 — Build</h3>
+          <p class="muted">Launch landing page v1, first 6–9 creatives, pixel + events, and core automations.</p>
+        </div>
+        <div class="card">
+          <h3>Week 3 — Scale</h3>
+          <p class="muted">Budget expansion with guardrails, creative iteration, and CRO A/B tests.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Simple pricing</h2>
+      <p class="muted">Pick a starter, grow into scale. Cancel anytime.</p>
+      <div class="pricing" style="margin-top:18px">
+        <div class="card plan">
+          <h3>Starter</h3>
+          <p class="muted">For new offers or local service businesses.</p>
+          <div class="price">$1,250/mo</div>
+          <ul>
+            <li><span class="check">✓</span>1 channel (Meta or Google)</li>
+            <li><span class="check">✓</span>Landing page v1</li>
+            <li><span class="check">✓</span>4 creatives/mo</li>
+            <li><span class="check">✓</span>Weekly reporting</li>
+          </ul>
+          <a class="btn gold" href="#contact">Get Started</a>
+        </div>
+        <div class="card plan" style="border-color:rgba(230,184,0,.5);box-shadow:0 0 0 2px rgba(230,184,0,.18)">
+          <div class="badge">Most Popular</div>
+          <h3>Growth</h3>
+          <p class="muted">Aggressive testing and profitable scale.</p>
+          <div class="price">$2,500/mo</div>
+          <ul>
+            <li><span class="check">✓</span>2–3 channels</li>
+            <li><span class="check">✓</span>9 creatives/mo</li>
+            <li><span class="check">✓</span>CRO & email flows</li>
+            <li><span class="check">✓</span>Bi-weekly strategy call</li>
+          </ul>
+          <a class="btn gold" href="#contact">Scale Me</a>
+        </div>
+        <div class="card plan">
+          <h3>Performance</h3>
+          <p class="muted">Custom for funded brands.</p>
+          <div class="price">$5k+/mo</div>
+          <ul>
+            <li><span class="check">✓</span>All major channels</li>
+            <li><span class="check">✓</span>Creative studio access</li>
+            <li><span class="check">✓</span>Advanced analytics</li>
+            <li><span class="check">✓</span>Rev-share options</li>
+          </ul>
+          <a class="btn gold" href="#contact">Apply</a>
+        </div>
+      </div>
+      <p class="tiny" style="margin-top:10px">Ad spend billed separately. Month-to-month. Onboarding in ~3 business days.</p>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section id="contact">
+    <div class="container cta">
+      <div>
+        <h2 class="section-title">Get your free growth audit</h2>
+        <p class="muted">Tell us about your business and goals. We’ll send a quick loom with the top 3 moves to grow in the next 30 days.</p>
+        <div class="hero-card" style="margin-top:14px">
+          <strong style="color:var(--gold)">Prefer to text?</strong>
+          <p class="muted" style="margin:.4rem 0 0">Text or WhatsApp <strong>(848) 248-9997</strong> — we’ll reply fast.</p>
+        </div>
+      </div>
+      <div>
+        <form id="contactForm">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="tel" name="phone" placeholder="Phone (optional)">
+          <textarea name="about" placeholder="Tell us about your business (what you sell, average order size, main goal)" required></textarea>
+          <button class="btn gold" type="submit">Send Request</button>
+          <div class="tiny">Or email us: <a href="mailto:Kunjpanchal20@gmail.com">Kunjpanchal20@gmail.com</a> • IG: <a href="https://instagram.com/kunjpanchal0" target="_blank" rel="noopener">@kunjpanchal0</a></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="year"></span> Magnetiq Media. All rights reserved.</div>
+      <div>Privacy • Terms • <a href="#top">Back to top ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form → prefill email draft
+    const form = document.getElementById('contactForm');
+    if(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        const subject = encodeURIComponent('Free Growth Audit — Magnetiq Media');
+        const body = encodeURIComponent(`Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone || '-'}
+
+About: ${data.about}
+
+Source: magnetiqmedia.site`);
+        window.location.href = `mailto:Kunjpanchal20@gmail.com?subject=${subject}&body=${body}`;
+      });
+    }
+  </script>
+</body>
+</html>
