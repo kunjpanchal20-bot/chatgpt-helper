@@ -34,12 +34,36 @@
     .logo svg{display:block}
     .brand{font-weight:900;letter-spacing:.5px;font-size:1.2rem;color:var(--gold)} /* gold letters */
     .nav-links{display:flex;gap:20px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-weight:600;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));box-shadow:0 12px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04)}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(0,0,0,.4)}
-    .btn.gold{border-color:rgba(230,184,0,.55);background:linear-gradient(180deg, rgba(230,184,0,.22), rgba(230,184,0,.12));color:#0b0b0f}
-    .btn.gold span{color:#0b0b0f}
-    .btn-outline{border-color:rgba(255,255,255,.14)}
-    /* --- Hero --- */
+    .btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 18px;border-radius:14px;font-weight:700;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow:0 10px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
+  transition:transform .18s ease, box-shadow .18s ease, filter .2s ease;
+}
+.btn.gold{
+  color:#0b0b0f;
+  border-color:rgba(230,184,0,.65);
+  background:
+    radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.24), transparent 60%),
+    linear-gradient(180deg, #ffd873, #e6b800);
+  box-shadow:
+    0 0 0 2px rgba(230,184,0,.18),
+    0 18px 38px rgba(230,184,0,.25),
+    0 0 22px rgba(230,184,0,.45);
+}
+.btn.gold:hover{
+  transform:translateY(-2px) scale(1.02);
+  filter:saturate(1.05);
+  box-shadow:
+    0 0 0 2px rgba(230,184,0,.24),
+    0 26px 60px rgba(230,184,0,.35),
+    0 0 36px rgba(230,184,0,.65);
+}
+.btn-outline{
+  border-color:rgba(255,255,255,.14)
+}
     .hero{position:relative;padding:96px 0 64px;overflow:hidden}
     .glow{position:absolute;inset:-20% -10% auto;height:560px;background:radial-gradient(60% 60% at 60% 40%, rgba(230,184,0,.28), transparent 60%), radial-gradient(60% 60% at 40% 60%, rgba(239,35,60,.22), transparent 60%)}
     .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
