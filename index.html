@@ -1,445 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Magnetiq Media — Attract. Convert. Grow.</title>
-  <meta name="description" content="Magnetiq Media is an AI-powered marketing studio that helps brands attract, convert, and grow using data, content, and automation." />
-  <meta name="theme-color" content="#0b0b0f" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LifeOS Task Calendar UI</title>
   <style>
-    :root{
-      --bg:#0b0b0f; /* near-black page background */
-      --card:#12121a;
-      --muted:#a9b0c3;
-      --text:#eef2ff;
-      --gold:#e6b800; /* brand gold */
-      --red:#ef233c;  /* magnet red */
-      --blue:#3b82f6; /* magnet blue */
-      --ring: 0 0 0 2px rgba(230,184,0,.25), 0 0 0 8px rgba(239,35,60,.08);
+    :root {
+      --bg: #0b1020;
+      --panel: #121a31;
+      --panel-2: #1a2445;
+      --text: #f4f7ff;
+      --muted: #98a6cb;
+      --line: #2c3a66;
+      --accent: #6ea8fe;
+      --ok: #2ec27e;
+      --warn: #f6c453;
+      --danger: #f66151;
+      --critical: #ff4d67;
+      --high: #ff9f43;
+      --medium: #ffd166;
+      --low: #4dd4ac;
     }
 
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;height:100%;
-      background:var(--bg);color:var(--text);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      scroll-behavior:smooth
-    }
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-
-    /* --- Nav --- */
-    .nav{
-      position:sticky;top:0;z-index:50;
-      background:linear-gradient(180deg, rgba(11,11,15,.85), rgba(11,11,15,.6) 40%, rgba(11,11,15,0));
-      backdrop-filter:saturate(180%) blur(10px)
-    }
-    .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .logo{display:flex;align-items:center;gap:10px}
-    .logo svg{display:block}
-    .brand{font-weight:900;letter-spacing:.5px;font-size:1.2rem;color:var(--gold)}
-    .nav-links{display:flex;gap:20px;align-items:center}
-
-    /* --- Buttons --- */
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:12px 18px;border-radius:14px;font-weight:700;
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow:0 10px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
-      transition:transform .18s ease, box-shadow .18s ease, filter .2s ease;
-    }
-    .btn.gold{
-      color:#0b0b0f;
-      border-color:rgba(230,184,0,.65);
-      background:
-        radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.24), transparent 60%),
-        linear-gradient(180deg, #ffd873, #e6b800);
-      box-shadow:
-        0 0 0 2px rgba(230,184,0,.18),
-        0 18px 38px rgba(230,184,0,.25),
-        0 0 22px rgba(230,184,0,.45);
-      filter: brightness(1.02);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-    }
-    .btn.gold:hover{
-      transform:translateY(-2px) scale(1.02);
-      filter:brightness(1.05) saturate(1.05);
-      box-shadow:
-        0 0 0 2px rgba(230,184,0,.24),
-        0 26px 60px rgba(230,184,0,.35),
-        0 0 36px rgba(230,184,0,.65);
-    }
-    .btn-outline{border-color:rgba(255,255,255,.14)} /* cleaned duplication */
-
-    /* Ambient glow wrapper for button groups */
-    .btn-group{
-      display:flex; flex-wrap:wrap; gap:12px; position:relative;
-    }
-    .btn-group::before{
-      content:""; position:absolute; inset:-18px;
-      background: radial-gradient(60% 60% at 50% 50%, rgba(248,226,124,.12) 0%, rgba(230,184,0,.06) 40%, transparent 70%);
-      filter: blur(14px);
-      z-index:-1; pointer-events:none;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at 20% -10%, #1c2d64 0, transparent 40%), var(--bg);
+      color: var(--text);
     }
 
-    /* --- Hero --- */
-    .hero{position:relative;padding:96px 0 64px;overflow:hidden}
-    .glow{position:absolute;inset:-20% -10% auto;height:560px;background:radial-gradient(60% 60% at 60% 40%, rgba(230,184,0,.28), transparent 60%), radial-gradient(60% 60% at 40% 60%, rgba(239,35,60,.22), transparent 60%)}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-weight:600;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.02)}
-    h1{font-size:clamp(2rem, 4.6vw, 4rem);line-height:1.05;margin:14px 0}
-    h1 strong{color:var(--gold);text-shadow:0 0 24px rgba(230,184,0,.22)}
-    .lead{color:#c6c9d6;font-size:1.1rem;max-width:52ch}
-    .hero-cta{margin-top:22px}
-
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);padding:22px;border-radius:18px;box-shadow:var(--ring)}
-    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-    .kpi .item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:16px;border-radius:14px;text-align:center}
-    .kpi .item h3{margin:0;font-size:1.6rem}
-    .kpi .item p{margin:6px 0 0;color:var(--muted);font-size:.9rem}
-    .device{position:relative;border-radius:22px;background:linear-gradient(180deg, #0f0f17, #0b0b0f);border:1px solid rgba(255,255,255,.08);box-shadow:0 25px 60px rgba(0,0,0,.55);padding:24px}
-    .screen{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
-    /* Replace broken hero image with a classy gradient panel (swap later with real asset) */
-    .hero-media{
-      display:flex; align-items:center; justify-content:center;
-      background:linear-gradient(180deg, rgba(248,226,124,.08), rgba(230,184,0,.03));
-      min-height:180px;
+    .container {
+      width: min(1200px, 95vw);
+      margin: 20px auto 28px;
+      display: grid;
+      gap: 16px;
     }
 
-    /* --- Sections --- */
-    section{padding:84px 0;border-top:1px solid rgba(255,255,255,.06)}
-    .section-title{font-size:2rem;margin:0 0 8px}
-    .muted{color:var(--muted)}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px}
-    .card h3{margin:0 0 8px}
-    .check{color:var(--gold);margin-right:8px}
-
-    /* --- Pricing --- */
-    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .plan{position:relative}
-    .plan .badge{position:absolute;top:-14px;right:16px;background:var(--red);color:#fff;padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.3px}
-    .price{font-size:2.2rem;margin:10px 0}
-
-    /* --- CTA / Contact --- */
-    .cta{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-    form{display:grid;gap:12px}
-    input, textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.02);color:var(--text);outline:none}
-    input:focus, textarea:focus{box-shadow:var(--ring);border-color:rgba(230,184,0,.4)}
-    textarea{min-height:120px;resize:vertical}
-    .tiny{font-size:.85rem;color:var(--muted)}
-
-    /* --- Footer --- */
-    footer{padding:24px 0 40px;border-top:1px solid rgba(255,255,255,.06);color:var(--muted)}
-
-    /* Responsive */
-    @media (max-width: 960px){
-      .hero-grid, .cta{grid-template-columns:1fr}
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
     }
-    @media (max-width: 840px){
-      .grid-3, .pricing{grid-template-columns:1fr;gap:16px}
-      .nav-links{display:none}
+
+    h1, h2, h3 { margin: 0 0 8px; }
+    p { margin: 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1.2fr .8fr;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat strong { display: block; font-size: 1.2rem; }
+    .stat span { color: var(--muted); font-size: .82rem; }
+
+    .row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    label { font-size: .82rem; color: var(--muted); display: block; margin-bottom: 4px; }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    textarea { min-height: 84px; resize: vertical; }
+
+    button {
+      cursor: pointer;
+      transition: transform .12s ease, filter .15s ease;
+    }
+    button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+
+    .btn-primary { background: linear-gradient(180deg, #6ea8fe, #4d86ff); border: none; color: #03122b; font-weight: 700; }
+    .btn-secondary { background: #1d2a52; }
+    .btn-danger { background: #3d1f30; border-color: #693049; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr .8fr .8fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .task-list { display: grid; gap: 10px; margin-top: 12px; }
+    .task-item {
+      border: 1px solid var(--line);
+      background: #101836;
+      border-radius: 12px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .task-top { display:flex; justify-content:space-between; gap:10px; align-items: start; }
+    .task-title { font-weight: 700; }
+    .meta { color: var(--muted); font-size: .82rem; display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+    .pill { border-radius: 999px; padding: 2px 8px; font-size: .72rem; font-weight: 700; border: 1px solid transparent; }
+
+    .urgency-low { background: rgba(77,212,172,.2); color: var(--low); border-color: rgba(77,212,172,.4); }
+    .urgency-medium { background: rgba(255,209,102,.18); color: var(--medium); border-color: rgba(255,209,102,.4); }
+    .urgency-high { background: rgba(255,159,67,.2); color: var(--high); border-color: rgba(255,159,67,.4); }
+    .urgency-critical { background: rgba(255,77,103,.2); color: var(--critical); border-color: rgba(255,77,103,.45); }
+
+    .status-not-started { color: var(--muted); }
+    .status-in-progress { color: var(--accent); }
+    .status-completed { color: var(--ok); }
+    .status-skipped { color: var(--warn); }
+
+    .actions { display: flex; gap: 6px; align-items: center; }
+    .actions button { width: auto; padding: 6px 8px; font-size: .78rem; }
+
+    .section-title { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; }
+    .small { font-size: .8rem; color: var(--muted); }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .toolbar { grid-template-columns: 1fr 1fr; }
+      .row, .row-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <!-- NAV -->
-  <header class="nav">
-    <div class="container nav-wrap">
-      <a href="#top" class="logo" aria-label="Magnetiq Media home">
-        <!-- Black tile, gold border, red & blue U-magnet -->
-        <svg width="40" height="40" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-          <title>Magnetiq Media logo</title>
-          <rect x="3" y="3" width="58" height="58" rx="14" fill="#000" stroke="var(--gold)" stroke-width="2"/>
-          <path d="M32 18 A14 14 0 0 0 18 32 V46" fill="none" stroke="var(--red)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M32 18 A14 14 0 0 1 46 32 V46" fill="none" stroke="var(--blue)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="18" y1="46" x2="24" y2="46" stroke="var(--red)" stroke-width="5" stroke-linecap="round"/>
-          <line x1="40" y1="46" x2="46" y2="46" stroke="var(--blue)" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="32" cy="18" r="1.6" fill="var(--gold)"/>
-        </svg>
-        <div class="brand">Magnetiq Media</div>
-      </a>
-      <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn-outline" href="#contact">Free Audit</a>
-        <a class="btn gold" href="#contact"><span>Book a Call</span> ➜</a>
-      </nav>
+  <div class="container">
+    <div class="card">
+      <h1>LifeOS Calendar + Task Dashboard</h1>
+      <p>Manage daily tasks, non-negotiables, urgency tiers, completion states, and “show until finished” rollover in one place.</p>
+      <div class="stats" id="stats"></div>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <main id="top" class="hero">
-    <div class="glow" aria-hidden="true"></div>
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">AI-Powered Marketing Studio</div>
-        <h1>Attract. <strong>Convert.</strong> Grow.<br/>Marketing built for the <strong>next era</strong>.</h1>
-        <p class="lead">We combine data, creative, and automation to bring customers to you—like a magnet. Get a fast audit, a clean plan, and compounding results in 90 days.</p>
-
-        <!-- Button group with ambient glow -->
-        <div class="hero-cta">
-          <div class="btn-group">
-            <a class="btn gold" href="#contact">Start with a Free Audit</a>
-            <a class="btn" href="#work">See Results ↓</a>
-          </div>
+    <div class="grid">
+      <div class="card">
+        <div class="section-title">
+          <h2>Add / Edit Task</h2>
+          <span class="small">Timezone: America/New_York • Daily summary: 10:00 AM</span>
         </div>
 
-        <div class="kpi">
-          <div class="item"><h3>3–5x</h3><p>ROAS target</p></div>
-          <div class="item"><h3>30 days</h3><p>to first wins</p></div>
-          <div class="item"><h3>24/7</h3><p>AI optimization</p></div>
-        </div>
-      </div>
-
-      <div>
-        <div class="device">
-          <div class="screen hero-media"><!-- gradient placeholder (swap with image later) --></div>
-          <div class="hero-card" style="margin-top:14px">
-            <strong style="color:var(--gold)">Magnetiq Method</strong>
-            <p class="muted" style="margin:.4rem 0 0">Audience → Offer → Creative → Channels → Automations → Iterate. No fluff, just measurable lift.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="container">
-      <h2 class="section-title">What we do</h2>
-      <p class="muted">Full-stack growth with AI copilots and human strategy.</p>
-      <div class="grid-3" style="margin-top:18px">
-        <div class="card">
-          <h3>AI Paid Media</h3>
-          <p class="muted">Meta, TikTok, Google. Creative testing at scale, high-intent audiences, and bid automation tuned for profitable CAC.</p>
-          <ul>
-            <li><span class="check">✓</span>Creative + UGC iteration</li>
-            <li><span class="check">✓</span>Server-side tracking</li>
-            <li><span class="check">✓</span>Daily pacing & ROAS guardrails</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Content that Converts</h3>
-          <p class="muted">Short-form video, carousels, and landing pages engineered for clarity, trust, and action.</p>
-          <ul>
-            <li><span class="check">✓</span>Script & storyboard system</li>
-            <li><span class="check">✓</span>Landing page CRO sprints</li>
-            <li><span class="check">✓</span>SEO quick wins</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Lifecycle & Automations</h3>
-          <p class="muted">Email/SMS flows, lead magnets, and CRM hygiene so every click is nurtured to revenue.</p>
-          <ul>
-            <li><span class="check">✓</span>Welcome & win-back flows</li>
-            <li><span class="check">✓</span>Lead scoring & alerts</li>
-            <li><span class="check">✓</span>Dashboards & weekly reports</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK / SOCIAL PROOF -->
-  <section id="work">
-    <div class="container">
-      <h2 class="section-title">Signals & results</h2>
-      <p class="muted">Quick snapshots from recent client wins and experiments.</p>
-      <div class="grid-3" style="margin-top:18px">
-        <div class="card">
-          <h3>Local Law Firm</h3>
-          <p class="muted">+8–10 new client inquiries/mo in 60 days using intake funnel + local SEO + Meta lead ads.</p>
-        </div>
-        <div class="card">
-          <h3>E-Com Accessories</h3>
-          <p class="muted">3.4x blended ROAS after creative sprint and TikTok Spark Ads + UGC.</p>
-        </div>
-        <div class="card">
-          <h3>Service Business</h3>
-          <p class="muted">Booked-out calendar for 6 weeks; automated follow-ups cut no-show rate by 42%.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section id="process">
-    <div class="container">
-      <h2 class="section-title">Our 3-week ramp</h2>
-      <div class="grid-3" style="margin-top:18px">
-        <div class="card">
-          <h3>Week 1 — Audit</h3>
-          <p class="muted">Data plumbing, offer clarity, analytics check, and quick-win backlog.</p>
-        </div>
-        <div class="card">
-          <h3>Week 2 — Build</h3>
-          <p class="muted">Launch landing page v1, first 6–9 creatives, pixel + events, and core automations.</p>
-        </div>
-        <div class="card">
-          <h3>Week 3 — Scale</h3>
-          <p class="muted">Budget expansion with guardrails, creative iteration, and CRO A/B tests.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing">
-    <div class="container">
-      <h2 class="section-title">Simple pricing</h2>
-      <p class="muted">Pick a starter, grow into scale. Cancel anytime.</p>
-      <div class="pricing" style="margin-top:18px">
-        <div class="card plan">
-          <h3>Starter</h3>
-          <p class="muted">For new offers or local service businesses.</p>
-          <div class="price">$1,250/mo</div>
-          <ul>
-            <li><span class="check">✓</span>1 channel (Meta or Google)</li>
-            <li><span class="check">✓</span>Landing page v1</li>
-            <li><span class="check">✓</span>4 creatives/mo</li>
-            <li><span class="check">✓</span>Weekly reporting</li>
-          </ul>
-          <div class="btn-group">
-            <a class="btn gold" href="#contact">Get Started</a>
-          </div>
-        </div>
-
-        <div class="card plan" style="border-color:rgba(230,184,0,.5);box-shadow:0 0 0 2px rgba(230,184,0,.18)">
-          <div class="badge">Most Popular</div>
-          <h3>Growth</h3>
-          <p class="muted">Aggressive testing and profitable scale.</p>
-          <div class="price">$2,500/mo</div>
-          <ul>
-            <li><span class="check">✓</span>2–3 channels</li>
-            <li><span class="check">✓</span>9 creatives/mo</li>
-            <li><span class="check">✓</span>CRO & email flows</li>
-            <li><span class="check">✓</span>Bi-weekly strategy call</li>
-          </ul>
-          <div class="btn-group">
-            <a class="btn gold" href="#contact">Scale Me</a>
-          </div>
-        </div>
-
-        <div class="card plan">
-          <h3>Performance</h3>
-          <p class="muted">Custom for funded brands.</p>
-          <div class="price">$5k+/mo</div>
-          <ul>
-            <li><span class="check">✓</span>All major channels</li>
-            <li><span class="check">✓</span>Creative studio access</li>
-            <li><span class="check">✓</span>Advanced analytics</li>
-            <li><span class="check">✓</span>Rev-share options</li>
-          </ul>
-          <div class="btn-group">
-            <a class="btn gold" href="#contact">Apply</a>
-          </div>
-        </div>
-      </div>
-      <p class="tiny" style="margin-top:10px">Ad spend billed separately. Month-to-month. Onboarding in ~3 business days.</p>
-    </div>
-  </section>
-
-  <!-- CTA / CONTACT -->
-  <section id="contact">
-    <div class="container cta">
-      <div>
-        <h2 class="section-title">Get your free growth audit</h2>
-        <p class="muted">Tell us about your business and goals. We’ll send a quick loom with the top 3 moves to grow in the next 30 days.</p>
-        <div class="hero-card" style="margin-top:14px">
-          <strong style="color:var(--gold)">Prefer to text?</strong>
-          <p class="muted" style="margin:.4rem 0 0">Text or WhatsApp <strong>(848) 248-9997</strong> — we’ll reply fast.</p>
-        </div>
-      </div>
-
-      <div>
-        <!-- Upgraded contact card with big tap targets -->
-        <div class="card" style="margin-bottom:14px; padding:22px">
-          <h3 style="margin:0 0 10px">Contact</h3>
-
-          <a style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:inherit"
-             href="mailto:Kunjpanchal20@gmail.com"
-             onmouseover="this.style.background='rgba(255,255,255,.04)';"
-             onmouseout="this.style.background='transparent';">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11Zm2.3-.3 7.2 5.1a1 1 0 0 0 1.16 0l7.24-5.1a1 1 0 0 0-.4-.08H4.7a1 1 0 0 0-.4.08Zm15.7 2.22-6.44 4.54a3 3 0 0 1-3.52 0L3.6 8.42v9.08c0 .28.22.5.5.5h15c.28 0 .5-.22.5-.5V8.42Z"/></svg>
+        <form id="taskForm">
+          <input type="hidden" id="taskId" />
+          <div class="row">
             <div>
-              <div style="font-weight:600">Email</div>
-              <div style="color:#a9b0c3">Kunjpanchal20@gmail.com</div>
+              <label>Title</label>
+              <input id="title" required />
             </div>
-          </a>
-
-          <a style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:inherit"
-             href="tel:+18482489997"
-             onmouseover="this.style.background='rgba(255,255,255,.04)';"
-             onmouseout="this.style.background='transparent';">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.25c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C11.06 21 3 12.94 3 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
             <div>
-              <div style="font-weight:600">Phone</div>
-              <div style="color:#a9b0c3">+1 (848) 248-9997</div>
+              <label>Due time</label>
+              <input id="due" type="datetime-local" required />
             </div>
-          </a>
+          </div>
 
-          <a style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:inherit"
-             href="https://instagram.com/kunjpanchal0" target="_blank" rel="noopener"
-             onmouseover="this.style.background='rgba(255,255,255,.04)';"
-             onmouseout="this.style.background='transparent';">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.75-.95a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>
+          <div class="row-3">
             <div>
-              <div style="font-weight:600">Instagram</div>
-              <div style="color:#a9b0c3">@kunjpanchal0</div>
+              <label>Urgency</label>
+              <select id="urgency">
+                <option>low</option>
+                <option selected>medium</option>
+                <option>high</option>
+                <option>critical</option>
+              </select>
             </div>
-          </a>
-        </div>
+            <div>
+              <label>Category</label>
+              <select id="category">
+                <option>work</option>
+                <option>health</option>
+                <option>personal</option>
+                <option>admin</option>
+                <option>other</option>
+              </select>
+            </div>
+            <div>
+              <label>Status</label>
+              <select id="status">
+                <option>not started</option>
+                <option>in progress</option>
+                <option>completed</option>
+                <option>skipped</option>
+              </select>
+            </div>
+          </div>
 
-        <form id="contactForm">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Email" required>
-          <input type="tel" name="phone" placeholder="Phone (optional)">
-          <textarea name="about" placeholder="Tell us about your business (what you sell, average order size, main goal)" required></textarea>
-          <button class="btn gold" type="submit">Send Request</button>
-          <div class="tiny">Or email us: <a href="mailto:Kunjpanchal20@gmail.com">Kunjpanchal20@gmail.com</a> • IG: <a href="https://instagram.com/kunjpanchal0" target="_blank" rel="noopener">@kunjpanchal0</a></div>
+          <div class="row">
+            <div>
+              <label><input type="checkbox" id="nonNegotiable" /> Non-negotiable (daily)</label>
+            </div>
+            <div>
+              <label><input type="checkbox" id="showUntilFinished" /> Show until finished (rollover)</label>
+            </div>
+          </div>
+
+          <div>
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Optional notes"></textarea>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <button class="btn-primary" type="submit">Save Task</button>
+            <button class="btn-secondary" type="button" id="clearForm">Clear Form</button>
+          </div>
         </form>
       </div>
-    </div>
-  </section>
 
-  <footer>
-    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div>© <span id="year"></span> Magnetiq Media. All rights reserved.</div>
-      <div>Privacy • Terms • <a href="#top">Back to top ↑</a></div>
+      <div class="card">
+        <h2>Morning Bulk Add</h2>
+        <p class="small">Paste your morning template and click parse to create tasks quickly.</p>
+        <textarea id="bulkInput" placeholder="Date: YYYY-MM-DD\nTasks:\n- Title: Gym\n  Due: 2026-04-24T07:00\n  Urgency: high\n  Category: health\n  Show Until Finished: yes\n  Notes: leg day"></textarea>
+        <div class="row" style="margin-top:10px;">
+          <button id="parseBulk" class="btn-primary" type="button">Parse + Add Tasks</button>
+          <button id="seedDemo" class="btn-secondary" type="button">Load Demo</button>
+        </div>
+
+        <hr style="border-color:var(--line);margin:14px 0;">
+        <h3>Daily Operations</h3>
+        <div class="row">
+          <button id="dailyReset" type="button">Reset Non-Negotiables</button>
+          <button id="rollover" type="button">Rollover Unfinished</button>
+        </div>
+      </div>
     </div>
-  </footer>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>Tasks</h2>
+        <span class="small" id="taskCount"></span>
+      </div>
+
+      <div class="toolbar">
+        <input id="search" placeholder="Search title or notes" />
+        <select id="filterStatus">
+          <option value="all">All statuses</option>
+          <option value="not started">not started</option>
+          <option value="in progress">in progress</option>
+          <option value="completed">completed</option>
+          <option value="skipped">skipped</option>
+        </select>
+        <select id="filterUrgency">
+          <option value="all">All urgency</option>
+          <option value="low">low</option>
+          <option value="medium">medium</option>
+          <option value="high">high</option>
+          <option value="critical">critical</option>
+        </select>
+        <select id="filterCategory">
+          <option value="all">All categories</option>
+          <option value="work">work</option>
+          <option value="health">health</option>
+          <option value="personal">personal</option>
+          <option value="admin">admin</option>
+          <option value="other">other</option>
+        </select>
+        <select id="filterType">
+          <option value="all">All types</option>
+          <option value="non">Non-negotiables</option>
+          <option value="regular">Regular tasks</option>
+        </select>
+      </div>
+
+      <div class="task-list" id="taskList"></div>
+    </div>
+  </div>
 
   <script>
-    // Dynamic year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const STORAGE_KEY = 'lifeos.tasks.v1';
+    const state = {
+      tasks: loadTasks(),
+      editingId: null,
+    };
 
-    // Contact form → opens email client with prefilled body
-    const form = document.getElementById('contactForm');
-    if(form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target).entries());
-        const subject = encodeURIComponent('Free Growth Audit — Magnetiq Media');
-        const body = encodeURIComponent(`Name: ${data.name}
-Email: ${data.email}
-Phone: ${data.phone || '-'}
+    const $ = (id) => document.getElementById(id);
 
-About: ${data.about}
-
-Source: magnetiqmedia.site`);
-        window.location.href = `mailto:Kunjpanchal20@gmail.com?subject=${subject}&body=${body}`;
-      });
+    function uid() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
     }
+
+    function loadTasks() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveTasks() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.tasks));
+    }
+
+    function resetForm() {
+      $('taskForm').reset();
+      $('taskId').value = '';
+      state.editingId = null;
+      $('status').value = 'not started';
+      $('urgency').value = 'medium';
+    }
+
+    function upsertTask(task) {
+      const idx = state.tasks.findIndex((t) => t.id === task.id);
+      if (idx >= 0) state.tasks[idx] = task;
+      else state.tasks.unshift(task);
+      saveTasks();
+      render();
+    }
+
+    function deleteTask(id) {
+      state.tasks = state.tasks.filter((t) => t.id !== id);
+      saveTasks();
+      render();
+    }
+
+    function editTask(id) {
+      const t = state.tasks.find((x) => x.id === id);
+      if (!t) return;
+      state.editingId = id;
+      $('taskId').value = t.id;
+      $('title').value = t.title;
+      $('due').value = t.due;
+      $('urgency').value = t.urgency;
+      $('category').value = t.category;
+      $('status').value = t.status;
+      $('notes').value = t.notes || '';
+      $('nonNegotiable').checked = t.nonNegotiable;
+      $('showUntilFinished').checked = t.showUntilFinished;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function cycleStatus(id) {
+      const order = ['not started', 'in progress', 'completed', 'skipped'];
+      const t = state.tasks.find((x) => x.id === id);
+      if (!t) return;
+      const next = order[(order.indexOf(t.status) + 1) % order.length];
+      t.status = next;
+      if (next === 'completed') {
+        t.lastCompletedAt = new Date().toISOString();
+        if (t.nonNegotiable) {
+          const today = new Date().toISOString().slice(0, 10);
+          if (t.lastCompletedDate !== today) {
+            t.streak = (t.streak || 0) + 1;
+            t.lastCompletedDate = today;
+          }
+        }
+      }
+      saveTasks();
+      render();
+    }
+
+    function parseBulkInput(raw) {
+      const lines = raw.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+      const tasks = [];
+      let current = null;
+      let section = 'tasks';
+
+      for (const line of lines) {
+        if (line.toLowerCase().startsWith('tasks:')) {
+          section = 'tasks';
+          continue;
+        }
+        if (line.toLowerCase().startsWith('non-negotiables:')) {
+          section = 'non-negotiables';
+          continue;
+        }
+
+        if (line.startsWith('- Title:')) {
+          if (current?.title) tasks.push(current);
+          current = {
+            id: uid(),
+            title: line.replace('- Title:', '').trim(),
+            due: '',
+            urgency: 'medium',
+            category: 'other',
+            status: 'not started',
+            notes: '',
+            nonNegotiable: section === 'non-negotiables',
+            showUntilFinished: false,
+            streak: 0,
+          };
+        } else if (current) {
+          if (line.startsWith('Due:')) current.due = line.replace('Due:', '').trim();
+          if (line.startsWith('Urgency:')) current.urgency = line.replace('Urgency:', '').trim().toLowerCase();
+          if (line.startsWith('Category:')) current.category = line.replace('Category:', '').trim().toLowerCase();
+          if (line.startsWith('Show Until Finished:')) {
+            const v = line.replace('Show Until Finished:', '').trim().toLowerCase();
+            current.showUntilFinished = ['yes', 'true', '1'].includes(v);
+          }
+          if (line.startsWith('Notes:')) current.notes = line.replace('Notes:', '').trim();
+        }
+      }
+      if (current?.title) tasks.push(current);
+      return tasks.filter((t) => t.title && t.due);
+    }
+
+    function runDailyReset() {
+      state.tasks.forEach((t) => {
+        if (t.nonNegotiable) {
+          t.status = 'not started';
+          const dueTime = t.due?.includes('T') ? t.due.split('T')[1] : '09:00';
+          const today = new Date().toISOString().slice(0, 10);
+          t.due = `${today}T${dueTime.slice(0,5)}`;
+        }
+      });
+      saveTasks();
+      render();
+      alert('Daily reset complete for non-negotiables.');
+    }
+
+    function runRollover() {
+      state.tasks.forEach((t) => {
+        if (t.showUntilFinished && t.status !== 'completed') {
+          const d = new Date(t.due);
+          if (!isNaN(d)) {
+            d.setDate(d.getDate() + 1);
+            t.due = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+            t.status = 'not started';
+          }
+        }
+      });
+      saveTasks();
+      render();
+      alert('Rollover complete for unfinished tasks with Show Until Finished enabled.');
+    }
+
+    function getFilteredTasks() {
+      const search = $('search').value.trim().toLowerCase();
+      const status = $('filterStatus').value;
+      const urgency = $('filterUrgency').value;
+      const category = $('filterCategory').value;
+      const type = $('filterType').value;
+
+      return [...state.tasks]
+        .filter((t) => status === 'all' || t.status === status)
+        .filter((t) => urgency === 'all' || t.urgency === urgency)
+        .filter((t) => category === 'all' || t.category === category)
+        .filter((t) => {
+          if (type === 'all') return true;
+          if (type === 'non') return t.nonNegotiable;
+          return !t.nonNegotiable;
+        })
+        .filter((t) => {
+          if (!search) return true;
+          return `${t.title} ${t.notes || ''}`.toLowerCase().includes(search);
+        })
+        .sort((a, b) => new Date(a.due) - new Date(b.due));
+    }
+
+    function renderStats() {
+      const total = state.tasks.length;
+      const completed = state.tasks.filter((t) => t.status === 'completed').length;
+      const inProgress = state.tasks.filter((t) => t.status === 'in progress').length;
+      const nonNegotiables = state.tasks.filter((t) => t.nonNegotiable).length;
+      const dueToday = state.tasks.filter((t) => t.due?.slice(0,10) === new Date().toISOString().slice(0,10)).length;
+
+      $('stats').innerHTML = `
+        <div class="stat"><strong>${total}</strong><span>Total</span></div>
+        <div class="stat"><strong>${completed}</strong><span>Completed</span></div>
+        <div class="stat"><strong>${inProgress}</strong><span>In Progress</span></div>
+        <div class="stat"><strong>${nonNegotiables}</strong><span>Non-negotiables</span></div>
+        <div class="stat"><strong>${dueToday}</strong><span>Due Today</span></div>
+      `;
+    }
+
+    function taskItemTemplate(t) {
+      return `
+        <div class="task-item">
+          <div>
+            <div class="task-top">
+              <div>
+                <div class="task-title">${t.title}</div>
+                <div class="meta">
+                  <span class="pill urgency-${t.urgency}">${t.urgency}</span>
+                  <span>${t.category}</span>
+                  <span class="status-${t.status.replaceAll(' ', '-')}">${t.status}</span>
+                  <span>Due: ${t.due.replace('T', ' ')}</span>
+                  ${t.nonNegotiable ? '<span class="pill">non-negotiable</span>' : ''}
+                  ${t.showUntilFinished ? '<span class="pill">show until finished</span>' : ''}
+                  ${t.nonNegotiable ? `<span>streak: ${t.streak || 0}</span>` : ''}
+                </div>
+              </div>
+            </div>
+            ${t.notes ? `<p class="small" style="margin-top:6px">${t.notes}</p>` : ''}
+          </div>
+          <div class="actions">
+            <button onclick="cycleStatus('${t.id}')">Next Status</button>
+            <button onclick="editTask('${t.id}')">Edit</button>
+            <button class="btn-danger" onclick="deleteTask('${t.id}')">Delete</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function render() {
+      renderStats();
+      const filtered = getFilteredTasks();
+      $('taskCount').textContent = `${filtered.length} shown / ${state.tasks.length} total`;
+      $('taskList').innerHTML = filtered.length
+        ? filtered.map(taskItemTemplate).join('')
+        : '<p class="small">No tasks match your filters.</p>';
+    }
+
+    $('taskForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const task = {
+        id: $('taskId').value || uid(),
+        title: $('title').value.trim(),
+        due: $('due').value,
+        urgency: $('urgency').value,
+        category: $('category').value,
+        status: $('status').value,
+        notes: $('notes').value.trim(),
+        nonNegotiable: $('nonNegotiable').checked,
+        showUntilFinished: $('showUntilFinished').checked,
+        streak: Number(($('taskId').value && state.tasks.find(t => t.id === $('taskId').value)?.streak) || 0),
+      };
+
+      upsertTask(task);
+      resetForm();
+    });
+
+    $('clearForm').addEventListener('click', resetForm);
+
+    $('parseBulk').addEventListener('click', () => {
+      const raw = $('bulkInput').value;
+      const parsed = parseBulkInput(raw);
+      if (!parsed.length) {
+        alert('No valid tasks found. Ensure each task has Title and Due.');
+        return;
+      }
+      state.tasks = [...parsed, ...state.tasks];
+      saveTasks();
+      render();
+      alert(`Added ${parsed.length} task(s).`);
+    });
+
+    $('seedDemo').addEventListener('click', () => {
+      const today = new Date();
+      const ymd = today.toISOString().slice(0,10);
+      const demo = [
+        { id: uid(), title: 'Morning workout', due: `${ymd}T07:00`, urgency: 'high', category: 'health', status: 'not started', notes: '45-minute session', nonNegotiable: true, showUntilFinished: true, streak: 2 },
+        { id: uid(), title: 'Client follow-up messages', due: `${ymd}T11:00`, urgency: 'medium', category: 'work', status: 'in progress', notes: 'Send 5 DMs', nonNegotiable: false, showUntilFinished: false, streak: 0 },
+        { id: uid(), title: 'Read 20 pages', due: `${ymd}T21:00`, urgency: 'low', category: 'personal', status: 'not started', notes: '', nonNegotiable: true, showUntilFinished: true, streak: 5 },
+      ];
+      state.tasks = [...demo, ...state.tasks];
+      saveTasks();
+      render();
+    });
+
+    $('dailyReset').addEventListener('click', runDailyReset);
+    $('rollover').addEventListener('click', runRollover);
+
+    ['search', 'filterStatus', 'filterUrgency', 'filterCategory', 'filterType'].forEach((id) => {
+      $(id).addEventListener('input', render);
+      $(id).addEventListener('change', render);
+    });
+
+    resetForm();
+    render();
+
+    window.editTask = editTask;
+    window.deleteTask = deleteTask;
+    window.cycleStatus = cycleStatus;
   </script>
 </body>
 </html>
