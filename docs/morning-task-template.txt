@@ -1,0 +1,16 @@
+Date: YYYY-MM-DD
+
+Tasks:
+- Title:
+  Due:
+  Urgency: low|medium|high|critical
+  Category: work|health|personal|admin|other
+  Show Until Finished: yes|no
+  Notes:
+
+Non-Negotiables:
+- Title:
+  Due:
+  Category: health|personal|other
+  Show Until Finished: yes|no
+  Notes:
