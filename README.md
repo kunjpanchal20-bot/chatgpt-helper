@@ -31,3 +31,13 @@ Default configuration is documented for:
 - 2 reminders (60 min + 10 min)
 - Daily 10:00 AM summary
 - Optional `Show Until Finished` rollover behavior
+
+## Local UI
+
+This repo now includes a runnable single-page dashboard at `index.html` where you can:
+- add/edit/delete tasks
+- mark statuses (`not started`, `in progress`, `completed`, `skipped`)
+- manage non-negotiables and streaks
+- set urgency tiers and categories
+- enable `Show Until Finished` rollover per task
+- bulk-add tasks from your morning template
