@@ -41,3 +41,17 @@ This repo now includes a runnable single-page dashboard at `index.html` where yo
 - set urgency tiers and categories
 - enable `Show Until Finished` rollover per task
 - bulk-add tasks from your morning template
+
+### Run it locally (so you can see it)
+
+From the repo root:
+
+```bash
+python3 -m http.server 8080
+```
+
+Then open:
+
+- `http://localhost:8080/index.html`
+
+Tip: if port `8080` is busy, run `python3 -m http.server 5173` and open `http://localhost:5173/index.html`.
