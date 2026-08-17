@@ -9,5 +9,9 @@ It includes prompts, code snippets, drafts, and small projects I create while ex
 - Draft website or project prototypes  
 - Document learnings and experiments
 
+## Projects
+- **[Neon Bay](neon-bay/)** — a top-down open-world driving/shooting sandbox that
+  runs in the browser with no dependencies. Open `neon-bay/index.html` to play.
+
 ## Purpose
 This repo is mainly for me to explore how GitHub works and how I can use it to keep track of my work with ChatGPT.

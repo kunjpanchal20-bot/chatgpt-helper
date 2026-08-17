@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Neon Bay — open world sandbox</title>
+<meta name="description" content="Neon Bay: an original top-down open-world driving and shooting sandbox that runs entirely in the browser." />
+<meta name="theme-color" content="#0b0f1a" />
+<link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+<canvas id="game" tabindex="0"></canvas>
+
+<!-- ------------------------------------------------------ main menu -->
+<div id="menu" class="overlay">
+  <div class="panel">
+    <h1 class="logo">NEON <span>BAY</span></h1>
+    <p class="tag">Twelve blocks of bad decisions.</p>
+
+    <div class="buttons">
+      <button id="btn-play" class="primary">Continue</button>
+      <button id="btn-newgame">New game</button>
+    </div>
+
+    <div class="controls">
+      <div class="col">
+        <h3>On foot</h3>
+        <ul>
+          <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move</li>
+          <li><kbd>Shift</kbd> sprint</li>
+          <li><span class="mouse">Mouse</span> aim &middot; <span class="mouse">Click</span> shoot</li>
+          <li><kbd>F</kbd> enter / exit vehicle</li>
+          <li><kbd>1</kbd>–<kbd>5</kbd> or <kbd>Q</kbd><kbd>E</kbd> weapons</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Driving</h3>
+        <ul>
+          <li><kbd>W</kbd><kbd>S</kbd> throttle / brake</li>
+          <li><kbd>A</kbd><kbd>D</kbd> steer</li>
+          <li><kbd>Space</kbd> handbrake (drift)</li>
+          <li><span class="mouse">Click</span> drive-by</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>World</h3>
+        <ul>
+          <li><kbd>H</kbd> start job / side hustle</li>
+          <li><kbd>M</kbd> full map</li>
+          <li><kbd>R</kbd> change radio station</li>
+          <li><kbd>P</kbd> or <kbd>Esc</kbd> pause</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="hint">Yellow marker = next story job. Steal a taxi or a cop car for side work.
+      Progress saves automatically.</p>
+    <p class="legal">An original game. Not affiliated with, endorsed by, or containing assets from any
+      commercial franchise.</p>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------ pause -->
+<div id="pause" class="overlay hidden">
+  <div class="panel narrow">
+    <h2>Paused</h2>
+    <div id="pause-stats" class="stats"></div>
+    <div class="buttons">
+      <button id="btn-resume" class="primary">Resume</button>
+      <button id="btn-mute">Sound: on</button>
+      <button id="btn-quit">Save &amp; quit to menu</button>
+    </div>
+    <p class="hint">Tip: type <b>guns</b>, <b>heal</b>, <b>cash</b>, <b>clean</b>, <b>heat</b>,
+      <b>boom</b>, <b>tank</b> or <b>ghost</b> while playing.</p>
+  </div>
+</div>
+
+<script src="js/util.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/city.js"></script>
+<script src="js/entities.js"></script>
+<script src="js/player.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/missions.js"></script>
+<script src="js/render.js"></script>
+<script src="js/hud.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
